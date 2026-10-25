@@ -1,0 +1,8 @@
+name: Disabilities
+version: '${version}'
+
+main: cc.synkdev.disabilities.Disabilities
+api-version: '26.3'
+load: POSTWORLD
+
+authors: [ Synk_ ]
