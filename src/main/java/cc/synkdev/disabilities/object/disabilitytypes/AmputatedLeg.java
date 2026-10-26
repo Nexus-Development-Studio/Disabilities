@@ -31,7 +31,10 @@ public class AmputatedLeg extends Disability {
 
     @Override
     public Runnable execute(Player p, boolean first) {
-        return () -> p.setWalkSpeed(0f);
+        return () -> {
+            if (p == null) return;
+            p.setWalkSpeed(0f);
+        };
     }
 
     @Override

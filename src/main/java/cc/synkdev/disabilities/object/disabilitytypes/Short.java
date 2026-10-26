@@ -24,6 +24,7 @@ public class Short extends Disability {
     @Override
     public Runnable reset(Player p) {
         return () -> {
+            if (p == null) return;
             Objects.requireNonNull(p.getAttribute(Attribute.SCALE)).setBaseValue(1.0);
             Objects.requireNonNull(p.getAttribute(Attribute.BLOCK_INTERACTION_RANGE)).setBaseValue(4.5);
             Objects.requireNonNull(p.getAttribute(Attribute.ENTITY_INTERACTION_RANGE)).setBaseValue(3.0);

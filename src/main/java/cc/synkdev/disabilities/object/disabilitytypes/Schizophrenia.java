@@ -31,6 +31,7 @@ public class Schizophrenia extends Disability {
     @Override
     public Runnable execute(Player p, boolean first) {
         return () -> {
+            if (p == null) return;
             p.playSound(p.getLocation(), Registry.SOUNDS.stream().toList().get(Math.toIntExact(Math.round(Math.random()*(Registry.SOUNDS.size()-1)))), 1f, 1f);
         };
     }

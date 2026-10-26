@@ -44,6 +44,7 @@ public class Deaf extends Disability {
     @Override
     public Runnable execute(Player p, boolean first) {
         return () -> {
+            if (p == null) return;
             if (first) {
                 p.addResourcePack(uuid, url, HexFormat.of().parseHex(hash), "This resource pack is required to simulate the deafness disability.", true);
             }

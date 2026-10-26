@@ -47,6 +47,7 @@ public class Asthma extends Disability {
     @Override
     public Runnable execute(Player p, boolean first) {
         return () -> {
+            if (p == null) return;
             if (!isDisabled(p)) return;
             long diff = System.currentTimeMillis() - PlayerManager.getSprintMap().getOrDefault(p.getUniqueId(), System.currentTimeMillis());
             if (diff > 30000) {

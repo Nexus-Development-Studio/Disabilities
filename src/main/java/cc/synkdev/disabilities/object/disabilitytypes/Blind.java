@@ -36,7 +36,10 @@ public class Blind extends Disability {
 
     @Override
     public Runnable execute(Player p, boolean first) {
-        return () -> p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*3, 1));
+        return () -> {
+            if (p == null) return;
+            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*3, 1));
+        };
     }
 
     @Override

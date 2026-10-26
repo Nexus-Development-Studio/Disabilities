@@ -94,6 +94,7 @@ public class DisabilityCommand extends BaseCommand {
     }
 
     @Subcommand("list")
+    @CommandCompletion("@players")
     @CommandPermission("disabilities.command.list")
     public void onList(CommandSender sender, String[] args) {
         if (args.length < 1) {

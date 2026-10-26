@@ -56,6 +56,7 @@ public class AmputatedHand extends Disability {
     @Override
     public Runnable execute(Player p, boolean first) {
         return () -> {
+            if (p == null) return;
             if (!first) return;
             if (p.getInventory().getItemInOffHand().getType() == Material.AIR) return;
             p.getLocation().getWorld().dropItemNaturally(p.getLocation(), p.getInventory().getItemInOffHand());
