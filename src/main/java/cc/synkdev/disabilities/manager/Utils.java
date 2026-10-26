@@ -45,4 +45,41 @@ public class Utils {
     public static Disability getDisability(String id) {
         return DisabilityManager.getDTypes().stream().filter(d -> d.getId().equalsIgnoreCase(id)).findFirst().orElse(null);
     }
+
+    public static String getTimer() {
+        return parseDuration(DisabilityManager.getTimer() - System.currentTimeMillis()/1000);
+    }
+
+    public static long parseTime(String time) {
+        if (time.equalsIgnoreCase("0")) return -1;
+        long totalMillis = 0;
+        if (time.endsWith("h")) {
+            totalMillis += Long.parseLong(time.replace("h", "")) * 60 * 60;
+        } else if (time.endsWith("m")) {
+            totalMillis += Long.parseLong(time.replace("m", "")) * 60;
+        } else if (time.endsWith("s")) {
+            totalMillis += Long.parseLong(time.replace("s", ""));
+        } else if (time.endsWith("d")) {
+            totalMillis += Long.parseLong(time.replace("d", "")) * 24 * 60 * 60;
+        } else if (time.endsWith("w")) {
+            totalMillis += Long.parseLong(time.replace("w", "")) * 7 * 24 * 60 * 60;
+        } else if (time.endsWith("mo")) {
+            totalMillis += Long.parseLong(time.replace("mo", "")) * 30 * 24 * 60 * 60;
+        } else if (time.endsWith("y")) {
+            totalMillis += Long.parseLong(time.replace("y", "")) * 365 * 24 * 60 * 60;
+        }
+        Utils.debug("Parsed time string: " + time + " to " + totalMillis + " seconds.");
+        return totalMillis * 1000;
+    }
+
+    public static String parseDuration(long time) {
+        if (time < 0) return  "Timer disabled";
+        long seconds = time %60;
+        long minutes = (time / 60) % 60;
+        if (minutes > 0) {
+            return String.format("%02d:%02d", minutes, seconds);
+        } else {
+            return String.format("%02d", seconds);
+        }
+    }
 }

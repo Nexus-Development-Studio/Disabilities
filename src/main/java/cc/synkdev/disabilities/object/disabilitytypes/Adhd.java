@@ -32,6 +32,11 @@ public class Adhd extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return null;
+    }
+
+    @Override
     public Runnable execute(Player p, boolean first) {
         return () -> {
             if (p == null) return;

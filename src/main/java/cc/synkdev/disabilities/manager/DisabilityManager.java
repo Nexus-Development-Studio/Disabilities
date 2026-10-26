@@ -1,23 +1,29 @@
 package cc.synkdev.disabilities.manager;
 
 import cc.synkdev.disabilities.Disabilities;
+import cc.synkdev.disabilities.command.DisabilityCommand;
 import cc.synkdev.disabilities.object.Disability;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ScanResult;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DisabilityManager {
     private DisabilityManager() {
         /* This utility class should not be instantiated */
     }
+    @Getter private static int taskId;
 
     @Getter
     private static final List<Disability> dTypes = new ArrayList<>();
+    @Getter @Setter private static long timer;
     public static void registerTypes(Disabilities core) {
         try (ScanResult result = new ClassGraph()
                 .enableAllInfo()
@@ -42,5 +48,12 @@ public class DisabilityManager {
                  NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void registerTask() {
+        taskId = Bukkit.getScheduler().runTaskTimer(Disabilities.getInstance(), () -> {
+            DisabilityCommand.assignDisabilities();
+            timer = System.currentTimeMillis()/1000+ConfigManager.getTimer()/1000;
+        }, ConfigManager.getTimer()/1000*20L, ConfigManager.getTimer()/1000*20L).getTaskId();
+        timer = System.currentTimeMillis()/1000+ConfigManager.getTimer()/1000;
     }
 }

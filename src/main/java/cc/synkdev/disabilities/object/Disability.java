@@ -1,6 +1,7 @@
 package cc.synkdev.disabilities.object;
 
 import cc.synkdev.disabilities.Disabilities;
+import cc.synkdev.disabilities.manager.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.EventExecutor;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public abstract class Disability implements Listener {
@@ -23,6 +25,7 @@ public abstract class Disability implements Listener {
 
     public abstract String getName();
     public abstract String getDescription();
+    public abstract Runnable reset(Player p);
 
     @Override
     public boolean equals(Object obj) {
@@ -44,5 +47,8 @@ public abstract class Disability implements Listener {
         for (Class<? extends Event> aClass : eventClasses()) {
             Bukkit.getPluginManager().registerEvent(aClass, this, EventPriority.HIGH, executor, Disabilities.getInstance());
         }
+    }
+    public boolean isDisabled(Player p) {
+        return p != null && PlayerManager.getPlayerMap().getOrDefault(p.getUniqueId(), new ArrayList<>()).contains(getId());
     }
 }

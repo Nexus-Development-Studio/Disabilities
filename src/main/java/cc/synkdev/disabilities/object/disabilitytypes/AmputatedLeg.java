@@ -40,6 +40,11 @@ public class AmputatedLeg extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return () -> p.setWalkSpeed(0.2f);
+    }
+
+    @Override
     public String getName() {
         return "Amputated Leg";
     }

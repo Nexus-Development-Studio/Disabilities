@@ -42,6 +42,7 @@ public class Dementia extends Disability {
         return () -> {
             if (p == null) return;
             if (p.getInventory().firstEmpty() == -1) return;
+            if (!isDisabled(p)) return;
 
             if (Math.random() < 0.85) {
                 return;
@@ -67,6 +68,11 @@ public class Dementia extends Disability {
             p.getInventory().setItem(setItem.getKey(), new ItemStack(Material.AIR));
             p.getInventory().setItem(dest, setItem.getValue());
         };
+    }
+
+    @Override
+    public Runnable reset(Player p) {
+        return null;
     }
 
     @Override

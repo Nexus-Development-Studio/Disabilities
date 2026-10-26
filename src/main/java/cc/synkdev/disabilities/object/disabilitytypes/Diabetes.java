@@ -47,6 +47,7 @@ public class Diabetes extends Disability {
         ));
         return new Consumer[]{event -> {
             PlayerItemConsumeEvent e = (PlayerItemConsumeEvent) event;
+            if (!isDisabled(e.getPlayer())) return;
             Player p = e.getPlayer();
             if (e.getItem().getType().isEdible() && sweetness.containsKey(e.getItem().getType())) {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20*10, sweetness.get(e.getItem().getType())));
@@ -68,6 +69,11 @@ public class Diabetes extends Disability {
     @Override
     public String getDescription() {
         return "Eating too much sugar will poison you.";
+    }
+
+    @Override
+    public Runnable reset(Player p) {
+        return null;
     }
 
     @Override

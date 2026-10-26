@@ -21,6 +21,7 @@ public class ConfigManager {
     private static YamlConfiguration config;
     @Getter
     private static boolean debug;
+    @Getter private static long timer;
 
     private ConfigManager() {
         /* This utility class should not be instantiated */
@@ -65,5 +66,8 @@ public class ConfigManager {
         config = YamlConfiguration.loadConfiguration(configFile);
 
         debug = config.contains("debug") && config.getBoolean("debug");
+        timer = Utils.parseTime(config.getString("timer", "10m"));
     }
+
+
 }

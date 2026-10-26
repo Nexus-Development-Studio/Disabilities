@@ -31,9 +31,15 @@ public class AmputatedHand extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return null;
+    }
+
+    @Override
     public Consumer<Event>[] handleEvent() {
         return new Consumer[]{event -> {
             InventoryClickEvent e = (InventoryClickEvent) event;
+            if (!isDisabled((Player) e.getWhoClicked())) return;
             if (e.getClickedInventory() != e.getWhoClicked().getInventory() || !(e.getSlot() == 40 || e.getClick() == ClickType.SWAP_OFFHAND))
                 return;
             e.getWhoClicked().getInventory().addItem(e.getCursor());
@@ -41,6 +47,7 @@ public class AmputatedHand extends Disability {
             Utils.sendMessage(e.getWhoClicked(), "<red>Your offhand has been amputated!");
         }, o -> {
             PlayerSwapHandItemsEvent e = (PlayerSwapHandItemsEvent) o;
+            if (!isDisabled(e.getPlayer())) return;
             e.setCancelled(true);
             Utils.sendMessage(e.getPlayer(), "<red>Your offhand has been amputated!");
         }};

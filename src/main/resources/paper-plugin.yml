@@ -7,3 +7,22 @@ api-version: '26.3'
 load: POSTWORLD
 
 authors: [ Synk_ ]
+permissions:
+  disabilities.command.give:
+    description: Allows the player to give a disability to another player.
+    default: op
+  disabilities.command.remove:
+    description: Allows the player to remove a disability from another player.
+    default: op
+  disabilities.command.reload:
+    description: Allows the player to reload the plugin.
+    default: op
+  disabilities.command.list:
+    description: Allows the player to list all disabilities of a player.
+    default: op
+  disabilities.command.reset:
+    description: Allows the player to reset all disabilities for one player.
+    default: op
+  disabilities.command.next:
+    description: Allows the player to skip the timer to the next disability.
+    default: op

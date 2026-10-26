@@ -22,6 +22,15 @@ public class Short extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return () -> {
+            Objects.requireNonNull(p.getAttribute(Attribute.SCALE)).setBaseValue(1.0);
+            Objects.requireNonNull(p.getAttribute(Attribute.BLOCK_INTERACTION_RANGE)).setBaseValue(4.5);
+            Objects.requireNonNull(p.getAttribute(Attribute.ENTITY_INTERACTION_RANGE)).setBaseValue(3.0);
+        };
+    }
+
+    @Override
     public Consumer<Event>[] handleEvent() {
         return new Consumer[0];
     }

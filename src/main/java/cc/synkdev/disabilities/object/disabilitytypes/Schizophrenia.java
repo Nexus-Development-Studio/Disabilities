@@ -19,6 +19,11 @@ public class Schizophrenia extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return null;
+    }
+
+    @Override
     public Consumer<Event>[] handleEvent() {
         return new Consumer[0];
     }

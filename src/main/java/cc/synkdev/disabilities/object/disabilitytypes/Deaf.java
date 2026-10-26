@@ -23,6 +23,11 @@ public class Deaf extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return () -> p.removeResourcePack(uuid);
+    }
+
+    @Override
     public Consumer<Event>[] handleEvent() {
         return new Consumer[0];
     }

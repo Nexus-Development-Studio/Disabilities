@@ -20,6 +20,11 @@ public class Seizures extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return null;
+    }
+
+    @Override
     public Class<? extends Event>[] eventClasses() {
         return new Class[0];
     }

@@ -1,1 +1,1 @@
-debug: false
+timer: 10m #Set to 0 to disable the timer

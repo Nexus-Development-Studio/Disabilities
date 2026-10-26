@@ -28,9 +28,15 @@ public class Mute extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return null;
+    }
+
+    @Override
     public Consumer<Event>[] handleEvent() {
         return new Consumer[]{event -> {
             AsyncChatEvent e = (AsyncChatEvent) event;
+            if (!isDisabled(e.getPlayer())) return;
             e.setCancelled(true);
             Utils.sendMessage(e.getPlayer(), "<red>You are muted and cannot send messages.");
         }};

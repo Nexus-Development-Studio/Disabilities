@@ -27,6 +27,11 @@ public class Cancer extends Disability {
     }
 
     @Override
+    public Runnable reset(Player p) {
+        return () -> Objects.requireNonNull(p.getAttribute(Attribute.MAX_HEALTH)).setBaseValue(20.0);
+    }
+
+    @Override
     public Consumer<Event>[] handleEvent() {
         return new Consumer[0];
     }
