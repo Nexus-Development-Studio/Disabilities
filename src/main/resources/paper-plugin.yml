@@ -3,7 +3,7 @@ version: '${version}'
 
 main: cc.synkdev.disabilities.Disabilities
 loader: cc.synkdev.disabilities.DisabilitiesLoader
-api-version: '26.3'
+api-version: '1.21.4'
 load: POSTWORLD
 
 authors: [ Synk_ ]
